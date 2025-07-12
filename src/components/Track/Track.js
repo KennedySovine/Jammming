@@ -1,47 +1,34 @@
-import React, { useCallback } from "react";
+import React from "react";
 import "./Track.css";
 
-const Track = (props) => {
-  const addTrack = useCallback(
-    () => {
-      props.onAdd(props.track);
-    },
-    [props.onAdd, props.track]
-  );
-
-  const removeTrack = useCallback(
-    () => {
-      props.onRemove(props.track);
-    },
-    [props.onRemove, props.track]
-  );
-
-  const renderAction = () => {
-    if (props.isRemoval) {
+function Track({ track, onAdd, onRemove, isRemoval }) {
+  // Render either the add or remove button
+  function renderAction() {
+    if (isRemoval) {
       return (
-        <button className="Track-action" onClick={removeTrack}>
+        <button className="Track-action" onClick={() => onRemove(track)}>
           -
         </button>
       );
     }
     return (
-      <button className="Track-action" onClick={addTrack}>
+      <button className="Track-action" onClick={() => onAdd(track)}>
         +
       </button>
     );
-  };
+  }
 
   return (
     <div className="Track">
       <div className="Track-information">
-        <h3>{props.track.name}</h3>
+        <h3>{track.name}</h3>
         <p>
-          {props.track.artist} | {props.track.album}
+          {track.artist} | {track.album}
         </p>
       </div>
       {renderAction()}
     </div>
   );
-};
+}
 
 export default Track;

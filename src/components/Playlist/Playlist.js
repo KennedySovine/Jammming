@@ -2,11 +2,10 @@ import './Playlist.css';
 import React from 'react';
 import TrackList from '../Tracklist/Tracklist';
 
-const Playlist = ({ playlist, onRemove, onSave, name, setName }) => {
+function Playlist({ playlist, onRemove, onSave, name, setName }) {
   return (
     <div className="Playlist">
       <input
-        type="text"
         value={name}
         onChange={e => setName(e.target.value)}
       />
@@ -20,6 +19,6 @@ const Playlist = ({ playlist, onRemove, onSave, name, setName }) => {
       </button>
     </div>
   );
-};
+}
 
 export default Playlist;

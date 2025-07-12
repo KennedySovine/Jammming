@@ -5,26 +5,28 @@ function SearchBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('');
 
   // Update state as user types
-  const handleInputChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const [term, setTerm] = useState('');
+
+  function handleTermChange(e) {
+    setTerm(e.target.value);
+  }
+
+  function search(e) {
     e.preventDefault();
     if (onSearch) {
-      onSearch(searchTerm);
+      onSearch(term);
     }
-  };
+  }
 
   return (
     <div className="SearchBar">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={search}>
         <input
-          type="text"
           placeholder="Enter a song, artist, or album"
-          value={searchTerm}
-          onChange={handleInputChange}
+          value={term}
+          onChange={handleTermChange}
         />
         <button type="submit">SEARCH</button>
       </form>
