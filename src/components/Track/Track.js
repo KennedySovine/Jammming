@@ -1,26 +1,47 @@
-import './Track.css';
-import React from 'react';
+import React, { useCallback } from "react";
+import "./Track.css";
 
-export const Track = ({ track, onAdd, onRemove, isInPlaylist }) => {
+const Track = (props) => {
+  const addTrack = useCallback(
+    () => {
+      props.onAdd(props.track);
+    },
+    [props.onAdd, props.track]
+  );
+
+  const removeTrack = useCallback(
+    () => {
+      props.onRemove(props.track);
+    },
+    [props.onRemove, props.track]
+  );
+
+  const renderAction = () => {
+    if (props.isRemoval) {
+      return (
+        <button className="Track-action" onClick={removeTrack}>
+          -
+        </button>
+      );
+    }
     return (
-        <div className="Track">
-            <div className="Track-information">
-                <div>
-                    <h3>{track.name}</h3>
-                    <p>
-                        {track.artists
-                            ? track.artists.map(artist => artist.name).join(', ')
-                            : track.artist
-                        }
-                        {track.album ? ` | ${track.album}` : ''}
-                    </p>
-                </div>
-                {isInPlaylist ? (
-                    <button className="Track-action" onClick={() => onRemove(track)}>-</button>
-                ) : (
-                    <button className="Track-action" onClick={() => onAdd(track)}>+</button>
-                )}
-            </div>
-        </div>
-    )
-}
+      <button className="Track-action" onClick={addTrack}>
+        +
+      </button>
+    );
+  };
+
+  return (
+    <div className="Track">
+      <div className="Track-information">
+        <h3>{props.track.name}</h3>
+        <p>
+          {props.track.artist} | {props.track.album}
+        </p>
+      </div>
+      {renderAction()}
+    </div>
+  );
+};
+
+export default Track;
