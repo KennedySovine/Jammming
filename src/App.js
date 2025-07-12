@@ -1,9 +1,11 @@
+
 import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react';
 import { SearchBar } from './components/SearchBar/SearchBar';
 import { Tracklist } from './components/Tracklist/Tracklist';
 import { Playlist } from './components/Playlist/Playlist';
+import Spotify from './components/utils/spotifyAPI';
 
 function App() {
   const [tracklist, setTracklist] = useState([]);
@@ -21,7 +23,7 @@ function App() {
   };
 
   const searchTracks = (searchTerm) => {
-    searchFor(searchTerm).then(results => {
+    Spotify.search(searchTerm).then(results => {
       if (results && results.length > 0) {
         setTracklist(results);
       } else {
@@ -37,7 +39,7 @@ function App() {
   const savePlaylist = async () => {
     const uris = playlist.map(track => track.uri).filter(Boolean);
     if (!playlistName || uris.length === 0) return;
-    await SpotifyAPI.savePlaylist(playlistName, uris);
+    await Spotify.savePlaylist(playlistName, uris);
     setPlaylist([]);
     setPlaylistName('New Playlist');
   };
