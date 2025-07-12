@@ -14,13 +14,13 @@ export const getAccessToken = () => {
 }
 
 export const searchFor = async (searchTerm) => {
-    const accessToken = SpotifyAPI.getAccessToken();
-    if (!accessToken) return [];
+    const token = await SpotifyAPI.getAccessToken();
+    if (!token) return [];
     const url = 'https://api.spotify.com/v1/search?type=track';
     const endPoint = `${url}&q=${encodeURIComponent(searchTerm)}`;
     const response = await fetch(endPoint, {
         headers: {
-            Authorization: `Bearer ${accessToken}`
+            Authorization: `Bearer ${token}`
         }
     });
     const jsonResponse = await response.json();
