@@ -24,7 +24,14 @@ export const searchFor = async (searchTerm) => {
         }
     });
     const jsonResponse = await response.json();
-    return jsonResponse.tracks ? jsonResponse.tracks.items : [];
+    if (!jsonResponse.tracks || !jsonResponse.tracks.items) return [];
+    return jsonResponse.tracks.items.map(track => ({
+        id: track.id,
+        name: track.name,
+        artist: track.artists && track.artists[0] ? track.artists[0].name : '',
+        album: track.album ? track.album.name : '',
+        uri: track.uri
+    }));
 }
 
 export const SpotifyAPI = {
