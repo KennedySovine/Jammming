@@ -33,6 +33,24 @@
   font-weight: bold;
 }
 
+.App-main {
+  display: flex;
+  gap: 24px; /* space between tracklist and playlist */
+  align-items: flex-start;
+}
+
+.Tracklist, .Playlist {
+  flex: 1;
+  min-width: 300px;
+  margin-top:  50px; /* space from the top */
+}
+
+.Tracklist h2,
+.Playlist input {
+  margin-top: 0;
+  margin-bottom: 24px; /* optional: add spacing below headings */
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
