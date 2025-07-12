@@ -1,5 +1,5 @@
 const clientId = 'a004db0e2eff43329be0a9f676ac1ff7';
-const redirectUri = 'https://localhost:3000/'; // Change to your production URL when deploying
+const redirectUri = "https://kennedysovine.github.io/Jammming/";
 let accessToken;
 let expiresIn;
 
