@@ -28,7 +28,7 @@ export const searchFor = async (searchTerm) => {
     return jsonResponse.tracks.items.map(track => ({
         id: track.id,
         name: track.name,
-        artist: track.artists && track.artists[0] ? track.artists[0].name : '',
+        artists: track.artists || [],
         album: track.album ? track.album.name : '',
         uri: track.uri
     }));
