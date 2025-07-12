@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Jammming/static/css/main.26622ccf.css",
-    "main.js": "/Jammming/static/js/main.a6524973.js",
+    "main.js": "/Jammming/static/js/main.6ee65d15.js",
     "index.html": "/Jammming/index.html",
     "main.26622ccf.css.map": "/Jammming/static/css/main.26622ccf.css.map",
-    "main.a6524973.js.map": "/Jammming/static/js/main.a6524973.js.map"
+    "main.6ee65d15.js.map": "/Jammming/static/js/main.6ee65d15.js.map"
   },
   "entrypoints": [
     "static/css/main.26622ccf.css",
-    "static/js/main.a6524973.js"
+    "static/js/main.6ee65d15.js"
   ]
 }
