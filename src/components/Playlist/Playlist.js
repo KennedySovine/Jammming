@@ -3,26 +3,20 @@ import React, { useState } from 'react';
 import { Track } from '../Track/Track';
 import { SpotifyAPI } from '../utils/spotifyAPI';
 
-export const Playlist = ({ playlist, onRemove }) => {
-    const [name, setName] = useState('New Playlist');
+export const Playlist = ({ playlist, onRemove, onSave, name, setName }) => {
 
     const handleNameChange = (e) => {
         setName(e.target.value);
     };
 
-    const handleSave = async () => {
-        // Collect track URIs
-        const trackUris = playlist.map(track => track.uri).filter(Boolean);
-        await SpotifyAPI.savePlaylist(name, trackUris);
-        // Optionally, clear playlist or show a success message here
-    };
+
 
     return (
         <div className="Playlist">
             <input
                 type="text"
                 value={name}
-                onChange={handleNameChange}
+                onChange={e => setName(e.target.value)}
             />
             <div className="TrackList">
                 {playlist.map(track => (
@@ -34,7 +28,7 @@ export const Playlist = ({ playlist, onRemove }) => {
                     />
                 ))}
             </div>
-            <button className="Playlist-save" onClick={handleSave}>
+            <button className="Playlist-save" onClick={onSave}>
                 SAVE TO SPOTIFY
             </button>
         </div>

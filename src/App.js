@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 import { SearchBar } from './components/SearchBar/SearchBar';
 import { Tracklist } from './components/Tracklist/Tracklist';
 import { Playlist } from './components/Playlist/Playlist';
-import { searchFor } from './components/utils/spotifyAPI'; 
 
 function App() {
   const [tracklist, setTracklist] = useState([]);
   const [playlist, setPlaylist] = useState([]);
+  const [playlistName, setPlaylistName] = useState('New Playlist');
 
   const addTrackToPlaylist = (track) => {
     setPlaylist([...playlist, track]);
@@ -33,6 +33,15 @@ function App() {
     });
   };
 
+  // Save playlist to Spotify
+  const savePlaylist = async () => {
+    const uris = playlist.map(track => track.uri).filter(Boolean);
+    if (!playlistName || uris.length === 0) return;
+    await SpotifyAPI.savePlaylist(playlistName, uris);
+    setPlaylist([]);
+    setPlaylistName('New Playlist');
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -42,7 +51,13 @@ function App() {
         <SearchBar onSearch={searchTracks} />
         <div className="App-main">
           <Tracklist tracks={tracklist} onAdd={addTrackToPlaylist} />
-          <Playlist playlist={playlist} onRemove={removeTrackFromPlaylist} onSave={() => { }} />
+          <Playlist 
+            playlist={playlist} 
+            onRemove={removeTrackFromPlaylist} 
+            onSave={savePlaylist}
+            name={playlistName}
+            setName={setPlaylistName}
+          />
         </div>
       </div>
     </div>
